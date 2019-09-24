@@ -6,11 +6,12 @@ public class Player : MonoBehaviour
 {
 
     public string Name;
+    public int n;
     public Transform aimTarget; // the target where we aim to land the ball
+    public Transform aimTarget2; // the target where we aim to land the ball
     float speed = 3; // move speed
     float force = 6; // ball impact force
     private Rigidbody selfRigidbody;
-    public int n;
 
     bool hitting; // boolean to know if we are hitting the ball or not 
 
@@ -37,7 +38,7 @@ public class Player : MonoBehaviour
         float h = Input.GetAxisRaw("Horizontal"); // get the horizontal axis of the keyboard
         float v = Input.GetAxisRaw("Vertical"); // get the vertical axis of the keyboard
 
-        if (Input.GetKeyDown(KeyCode.F)) 
+        if (Input.GetKeyDown(KeyCode.F))
         {
             hitting = true; // we are trying to hit the ball and aim where to make it land
             currentShot = shotManager.topSpin; // set our current shot to top spin
@@ -92,20 +93,19 @@ public class Player : MonoBehaviour
 
             Vector3 dir;
 
+            if (n == 1)
+                dir = aimTarget.position - transform.position; // get the direction to where we want to send the ball
 
-            dir = aimTarget.position - transform.position; // get the direction to where we want to send the ball
-
-           
+            else
+                dir = aimTarget2.position - transform.position; // get the direction to where we want to send the ball
 
             other.GetComponent<Rigidbody>().velocity = dir.normalized * currentShot.hitForce + new Vector3(0, currentShot.upForce, 0);
             //add force to the ball plus some upward force according to the shot being played
 
             Vector3 ballDir;
-            if (n==1)
             ballDir = ball.position - transform.position; // get the direction of the ball compared to us to know if it is
 
-            else
-            ballDir = ball.position + transform.position; // get the direction of the ball compared to us to know if it is
+
 
             if (ballDir.x >= 0)                                   // on out right or left side 
             {
@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
             }
 
             aimTarget.position = aimTargetInitialPosition; // reset the position of the aiming gameObject to it's original position ( center)
-            
+
         }
     }
 

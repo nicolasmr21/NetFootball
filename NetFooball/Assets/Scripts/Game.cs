@@ -24,14 +24,15 @@ public class Game : MonoBehaviour
     {
         Debug.Log(dataReceive);
 
-            if (dataReceive.Contains("Player1"))
+            if (dataReceive.Contains("Player2"))
             {
                 player1.GetComponent<Player>().n = 2;
-                Debug.Log("Player1" + GameNetwork.ClientName);
+                Debug.Log("Player2" + GameNetwork.ClientName);
                 Transform temp = player1.transform;
                 
                 player1.transform.position = player2.transform.position;
                 player2.transform.position = new Vector3( player2.transform.position.x, player2.transform.position.y, float.Parse("-18.54659"));
+                
 
             }
 
@@ -54,22 +55,21 @@ public class Game : MonoBehaviour
                     
                     if (playerName != player1.GetComponent<Player>().Name)
                     {
-
                         player2.transform.position =new Vector3(transform[0], transform[1], transform[2]) ;
                         player2.transform.rotation = new Quaternion(transform[3], transform[4], transform[5], transform[6]);
-                        //ball.transform.Translate(new Vector3(transform[7], transform[8], transform[9]));
+                        ball.GetComponent<Rigidbody>().MovePosition(new Vector3(transform[7], transform[8], transform[9]));
 
                     }
+
 
                 }
 
 
         }
-
         }
 
 
-                catch (Exception e)
+        catch (Exception e)
         {
 
 
