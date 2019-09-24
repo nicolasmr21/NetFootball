@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    public string Name;
     public Transform aimTarget; // the target where we aim to land the ball
     float speed = 3; // move speed
     float force = 6; // ball impact force
     private Rigidbody selfRigidbody;
+    public int n;
 
     bool hitting; // boolean to know if we are hitting the ball or not 
 
@@ -21,6 +24,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        n = 1;
         selfRigidbody = gameObject.GetComponent<Rigidbody>();
         animator = GetComponent<Animator>(); // referennce out animator
         aimTargetInitialPosition = aimTarget.position; // initialise the aim position to the center( where we placed it in the editor )
@@ -85,13 +89,24 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Ball")) // if we collide with the ball 
         {
-            
+
+            Vector3 dir;
+
+
+            dir = aimTarget.position - transform.position; // get the direction to where we want to send the ball
+
            
-            Vector3 dir = aimTarget.position - transform.position; // get the direction to where we want to send the ball
+
             other.GetComponent<Rigidbody>().velocity = dir.normalized * currentShot.hitForce + new Vector3(0, currentShot.upForce, 0);
             //add force to the ball plus some upward force according to the shot being played
 
-            Vector3 ballDir = ball.position - transform.position; // get the direction of the ball compared to us to know if it is
+            Vector3 ballDir;
+            if (n==1)
+            ballDir = ball.position - transform.position; // get the direction of the ball compared to us to know if it is
+
+            else
+            ballDir = ball.position + transform.position; // get the direction of the ball compared to us to know if it is
+
             if (ballDir.x >= 0)                                   // on out right or left side 
             {
                 animator.Play("forehand");                        // play a forhand animation if the ball is on our right
