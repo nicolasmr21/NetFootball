@@ -80,6 +80,10 @@ def createNewServer(server_host, server_port, max_connections = 2, max_connectio
                 connection.send(string_Msj)
                 player = True
 
+
+            if(player):
+                player = False    
+
             #creo una tupla con los anteriores valores
             tupleC = connection, address, id
             #se agrega a la cola
@@ -107,6 +111,7 @@ def check_state():
                 tupleC = queue_clients.get()
                 queue_clients.put(tupleC)
                 server_mensage = bytes("Wait", 'utf-8')
+
                 tupleC[0].send(server_mensage)
             except:
                 tupleC = queue_clients.get()

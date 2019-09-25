@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Ball : MonoBehaviour
 {
-    Vector3 initialPos; // ball's initial position
+    public Vector3 initialPos; // ball's initial position
 
     public int score1;
     public int score2;

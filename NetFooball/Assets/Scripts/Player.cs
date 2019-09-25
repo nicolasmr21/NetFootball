@@ -118,7 +118,10 @@ public class Player : MonoBehaviour
             selfRigidbody.AddForce(0, 10, 0, ForceMode.Impulse);
         }
 
-        score = ball.GetComponent<Ball>().score1;
+        if(n==1)
+            score = ball.GetComponent<Ball>().score1;
+        else
+            score = ball.GetComponent<Ball>().score2;
 
     }
 
