@@ -12,23 +12,32 @@ public class Player : MonoBehaviour
     float speed = 3; // move speed
     float force = 6; // ball impact force
     private Rigidbody selfRigidbody;
+    public Vector3 initialPos; // ball's initial position
+
 
     bool hitting; // boolean to know if we are hitting the ball or not 
+    bool isInPosition; //Boolean to know if the player is in position to hit
 
     public Transform ball; // the ball 
     Animator animator;
 
     Vector3 aimTargetInitialPosition; // initial position of the aiming gameObject which is the center of the opposite court
+    Vector3 aimTarget2InitialPosition; // initial position of the aiming gameObject which is the center of the opposite court
+    
+
+
 
     ShotManager shotManager; // reference to the shotmanager component
     Shot currentShot; // the current shot we are playing to acces it's attributes
 
     private void Start()
     {
+        initialPos = transform.position;
         n = 1;
         selfRigidbody = gameObject.GetComponent<Rigidbody>();
         animator = GetComponent<Animator>(); // referennce out animator
         aimTargetInitialPosition = aimTarget.position; // initialise the aim position to the center( where we placed it in the editor )
+        aimTarget2InitialPosition = aimTarget2.position; // initialise the aim position to the center( where we placed it in the editor )
         shotManager = GetComponent<ShotManager>(); // accesing our shot manager component 
         currentShot = shotManager.topSpin; // defaulting our current shot as topspin
     }
@@ -83,6 +92,8 @@ public class Player : MonoBehaviour
             selfRigidbody.AddForce(0, 10, 0, ForceMode.Impulse);
         }
 
+       
+
     }
 
 
@@ -90,7 +101,6 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Ball")) // if we collide with the ball 
         {
-
             Vector3 dir;
 
             if (n == 1)
@@ -116,10 +126,15 @@ public class Player : MonoBehaviour
                 animator.Play("backhand");
             }
 
+            if (n == 1)
             aimTarget.position = aimTargetInitialPosition; // reset the position of the aiming gameObject to it's original position ( center)
+
+            else
+            aimTarget2.position = aimTargetInitialPosition; // reset the position of the aiming gameObject to it's original position ( center)
 
         }
     }
 
 
+    
 }

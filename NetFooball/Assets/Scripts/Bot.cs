@@ -9,6 +9,8 @@ public class Bot : MonoBehaviour
     Animator animator;
     public Transform ball;
     public Transform aimTarget; // aiming gameObject
+    Vector3 initialPos; // ball's initial position
+
 
     public Transform[] targets; // array of targets to aim at
 
@@ -20,23 +22,24 @@ public class Bot : MonoBehaviour
 
     void Start()
     {
+        initialPos = transform.position;
         targetPosition = transform.position; // initialize the targetPosition to its initial position in the court
         animator = GetComponent<Animator>(); // reference to our animator for animations 
         shotManager = GetComponent<ShotManager>(); // reference to our shot manager to acces shots
     }
 
-    //void Update()
-    //{
-    //    Move(); // calling the move method
-    //}
+    void Update()
+    {
+        Move(); // calling the move method
+    }
 
-    //void Move()
-    //{
-    //    targetPosition.x = ball.position.x; // update the target position to the ball's x position so the bot only moves on the x axis
-    //    targetPosition.z = ball.position.z; // update the target position to the ball's x position so the bot only moves on the x axis
+    void Move()
+    {
+        targetPosition.x = ball.position.x; // update the target position to the ball's x position so the bot only moves on the x axis
+        targetPosition.z = ball.position.z; // update the target position to the ball's x position so the bot only moves on the x axis
 
-    //    transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime); // lerp it's position
-    //}
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime); // lerp it's position
+    }
 
     Vector3 PickTarget() // picks a random target from the targets array to be aimed at
     {
