@@ -5,6 +5,7 @@ SceneListBegin?
 Assets/Scenes/MainScene.unity
 Assets/Scenes/Local.unity
 Assets/Scenes/Local Online.unity
+Assets/Scenes/Summary.unity
 SceneListEnd?
 984dcc0ba3707b7691fbdca8ff508d28 Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
 01aa15e337e3a9c62f15153dfac6d589 Unity.TextMeshPro.dll:TMPro.TMP_Dropdown
@@ -117,7 +118,7 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 303ad70ce203ad874efe2965d0fbcff9 Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsEventTracker
 7fb9de8dcf73854b6b328eca1f7a6e6d Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsTracker
-73af345192e97b769b57c748726d1790 Assembly-CSharp.dll:.Bot
+80fef05635c12dd7b84378fef0212ff1 Assembly-CSharp.dll:.Bot
 b8a5e8091ab0b8861d2add371082c5e0 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 50f023163b78c9fceb083b1d4c2dd017 Assembly-CSharp.dll:.Game
@@ -164,3 +165,4 @@ d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 75b9e869045febff34eb1b6824fa0533 Assembly-CSharp.dll:.ShotManager
+e3b348400b59c46d98845d12fe65e63a Assembly-CSharp.dll:.Summary

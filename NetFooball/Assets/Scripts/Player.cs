@@ -86,7 +86,31 @@ public class Player : MonoBehaviour
 
         if ((h != 0 || v != 0) ) // if we want to move and we are not hitting the ball
         {
-            transform.Translate(new Vector3(h, 0, v) * speed * Time.deltaTime); // move on the court
+            
+
+             transform.Translate(new Vector3(h, 0, v) * speed * Time.deltaTime); // move on the court
+
+            float x = transform.position.x;
+            float y = transform.position.y;
+            float z = transform.position.z;
+
+            if (x < -7 ) {
+                transform.position = new Vector3(-7f,y,z);
+            }
+            if (x > 7.5)
+            {
+                transform.position = new Vector3(7.5f, y, z);
+            }
+            if (z > 9)
+            {
+                transform.position = new Vector3(x, y, 9f);
+            }
+            if (z < -13.5)
+            {
+                transform.position = new Vector3(x, y, -13.5f);
+            }
+
+
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -111,7 +135,7 @@ public class Player : MonoBehaviour
             else
                 dir = aimTarget2.position - transform.position; // get the direction to where we want to send the ball
 
-            other.GetComponent<Rigidbody>().velocity = dir.normalized * currentShot.hitForce + new Vector3(0, currentShot.hitForce, 0);
+            other.GetComponent<Rigidbody>().velocity = dir.normalized * currentShot.hitForce + new Vector3(0, currentShot.upForce, 0);
             //add force to the ball plus some upward force according to the shot being played
 
             Vector3 ballDir;

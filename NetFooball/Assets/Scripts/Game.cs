@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Game : MonoBehaviour
@@ -20,6 +21,7 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad (transform.gameObject);
         part = 1;
         initial = false;
         Debug.Log("Nuevo");
@@ -40,7 +42,7 @@ public class Game : MonoBehaviour
 
         }
         else if(time <0 && part==2) {
-             
+            SceneManager.LoadScene(3);
         }
     }
 
@@ -85,7 +87,7 @@ public class Game : MonoBehaviour
                         player2.transform.rotation = new Quaternion(transform[3], transform[4], transform[5], transform[6]);
                         ball.GetComponent<Rigidbody>().MovePosition(new Vector3(transform[7], transform[8], transform[9]));
                         ball.GetComponent<Ball>().score2 = int.Parse(transform[10].ToString());
-
+                        player2.GetComponent<Bot>().name = playerName;
 
                     }
                     else

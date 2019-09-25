@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\GUI\MainSceneAction.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\ShotManager.cs" />
+    <Compile Include="Assets\Summary.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/nicol/Desktop/NetFootball/NetFooball/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

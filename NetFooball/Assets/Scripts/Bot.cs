@@ -10,7 +10,7 @@ public class Bot : MonoBehaviour
     public Transform ball;
     public Transform aimTarget; // aiming gameObject
     public Vector3 initialPos;  // ball's initial position
-
+    public string name;
 
     public Transform[] targets; // array of targets to aim at
 
