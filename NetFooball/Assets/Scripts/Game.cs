@@ -13,19 +13,20 @@ public class Game : MonoBehaviour
     public GameObject ball;
     public Boolean initial;
     public Text timeText;
-    float time = 60.0f;
-    int part;
-    int n;
+    public float time = 60.0f;
+    public int part;
+    public int n;
+    public Text waiting;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad (transform.gameObject);
         part = 1;
         initial = false;
         Debug.Log("Nuevo");
         player1.GetComponent<Player>().Name = GameNetwork.ClientName;
+        waiting.text = "";
     }
 
     private void Update()

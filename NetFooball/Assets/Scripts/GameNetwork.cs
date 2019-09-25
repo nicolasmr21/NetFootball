@@ -76,6 +76,19 @@ public class GameNetwork : MonoBehaviour
                 LoopConnection();
             }
 
+            if (dataReceive.Contains("Wait"))
+            {
+                b.GetComponent<Ball>().score1 = 0;
+                b.GetComponent<Ball>().score2 = 0;
+                gameObject.GetComponent<Game>().time = 60.0f;
+                gameObject.GetComponent<Game>().waiting.text = "Esperando jugadores...";
+
+            }
+            else {
+                gameObject.GetComponent<Game>().waiting.text = "";
+
+            }
+
             gameObject.GetComponent<Game>().UpdatePlay(dataReceive);
 
             // Data a enviar

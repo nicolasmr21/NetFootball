@@ -9766,6 +9766,7 @@ MonoBehaviour:
   ball: {fileID: 1640194199}
   aimTarget: {fileID: 1220851062}
   initialPos: {x: 0, y: 0, z: 0}
+  name: 
   targets:
   - {fileID: 1308338365}
   - {fileID: 946771152}
