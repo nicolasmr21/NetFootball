@@ -81,7 +81,7 @@ public class GameNetwork : MonoBehaviour
             // Data a enviar
             string dataSend = ClientName + "|" + p.transform.position.x + "|" + p.transform.position.y + "|" + p.transform.position.z
                 + "|" + p.transform.rotation.x + "|" + p.transform.rotation.y + "|" + p.transform.rotation.z + "|" + p.transform.rotation.w
-                + "|" + b.transform.position.x + "|" + b.transform.position.y + "|" + b.transform.position.z ;
+                + "|" + b.transform.position.x + "|" + b.transform.position.y + "|" + b.transform.position.z + "|" +p.GetComponent<Player>().score;
            ;
         
 			//

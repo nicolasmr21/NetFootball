@@ -13,6 +13,12 @@ public class MainSceneAction : MonoBehaviour
 	{
 		GameNetwork.ClientName = FieldNamePlayer.text;
         GameNetwork.SERVER_IP = FieldIPServer.text;
-		SceneManager.LoadScene(1);
+		SceneManager.LoadScene(2);
 	}
+
+    public void OnPlayLocal()
+    {
+        GameNetwork.ClientName = FieldNamePlayer.text;
+        SceneManager.LoadScene(1);
+    }
 }
