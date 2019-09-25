@@ -20,19 +20,20 @@ public class Ball : MonoBehaviour
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero; // reset it's velocity to 0 so it doesn't move anymore
             transform.position = initialPos; // reset it's position 
-            score1 += 1;
+            score1 = score1 + 1;
         }
 
         else if (collision.transform.CompareTag("Wall2")) // if the ball hits a wall
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero; // reset it's velocity to 0 so it doesn't move anymore
             transform.position = initialPos; // reset it's position 
-            score2 += 1;
+            score2 = score2 + 1;
         }
     }
 
     public void Update(){
         GameObject.Find("Score1").GetComponent<TextMesh>().text = score1 + "";
+        GameObject.Find("Score2").GetComponent<TextMesh>().text = score2 + "";
     }
 
 }
