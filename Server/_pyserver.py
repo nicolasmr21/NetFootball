@@ -57,7 +57,9 @@ def createNewServer(server_host, server_port, max_connections = 2, max_connectio
     print( "[{0}] Esperando clientes...".format(dataTime()))
 
     player = True
-     
+
+    _thread.start_new_thread(check_state, ())
+
     while True:
         
        #connection representa la conexion, address es una tupla que contiene la ip y el puerto por donde se comunica el cliente
@@ -98,17 +100,19 @@ def dataTime():
     return datetime.now().strftime("%d/%m/%Y-%H:%M:%S")
 
 #metodo que se encarga de enviar un mensaje a los jugadores en espero y verifica que jugador sale de la cola
-# def check_state():
-#     while True:
-#         while not queue_clients.empty():
-#             try:
-#                 tupleC = queue_clients.get()
-#                 server_mensage = bytes("Wait", 'utf-8')
-#                 tupleC[0].send(server_mensage)
-#                 queue_clients.put(tupleC)
-#             except:
-#                 print( "[{0}] Cliente desconectado - {1}".format(dataTime(), queue_clients.get()[]) )
-
+def check_state():
+    while True:
+        while not queue_clients.empty():
+            try:
+                tupleC = queue_clients.get()
+                queue_clients.put(tupleC)
+                server_mensage = bytes("Wait", 'utf-8')
+                tupleC[0].send(server_mensage)
+            except:
+                tupleC = queue_clients.get()
+                string_ip_address = tupleC[1][0] + ":" + str(tupleC[1][1])
+                print( "[{0}] Cliente desconectado - {1}".format(dataTime(), string_ip_address) )
+                del dic_clients[tupleC[2]]
 
 
 #Metodo que se encarga se crear un juego entre dos conexiones
