@@ -71,9 +71,9 @@ public class GameNetwork : MonoBehaviour
             string dataReceive = Encoding.ASCII.GetString(bufferDataReceive);
             //
             if(dataReceive.Contains("NoPlayer2")) {
+                SceneManager.LoadScene(1);
                 clientSocket.Close();
                 LoopConnection();
-                SceneManager.LoadScene(1);
             }
 
             gameObject.GetComponent<Game>().UpdatePlay(dataReceive);
