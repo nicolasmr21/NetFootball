@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     float force = 6; // ball impact force
     private Rigidbody selfRigidbody;
     public Vector3 initialPos; // ball's initial position
-
+    public int score;
 
     bool hitting; // boolean to know if we are hitting the ball or not 
     bool isInPosition; //Boolean to know if the player is in position to hit
@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        
+        score = 0;
         initialPos = transform.position;
         n = 1;
         selfRigidbody = gameObject.GetComponent<Rigidbody>();
@@ -44,8 +46,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        float h = Input.GetAxisRaw("Horizontal"); // get the horizontal axis of the keyboard
-        float v = Input.GetAxisRaw("Vertical"); // get the vertical axis of the keyboard
+        float h = Input.GetAxis("Horizontal") ; // get the horizontal axis of the keyboard
+        float v = Input.GetAxis("Vertical") ; // get the vertical axis of the keyboard
 
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -82,7 +84,7 @@ public class Player : MonoBehaviour
         }
 
 
-        if ((h != 0 || v != 0) && !hitting) // if we want to move and we are not hitting the ball
+        if ((h != 0 || v != 0) ) // if we want to move and we are not hitting the ball
         {
             transform.Translate(new Vector3(h, 0, v) * speed * Time.deltaTime); // move on the court
         }
@@ -92,7 +94,7 @@ public class Player : MonoBehaviour
             selfRigidbody.AddForce(0, 10, 0, ForceMode.Impulse);
         }
 
-       
+        score = ball.GetComponent<Ball>().score1;
 
     }
 
@@ -109,7 +111,7 @@ public class Player : MonoBehaviour
             else
                 dir = aimTarget2.position - transform.position; // get the direction to where we want to send the ball
 
-            other.GetComponent<Rigidbody>().velocity = dir.normalized * currentShot.hitForce + new Vector3(0, currentShot.upForce, 0);
+            other.GetComponent<Rigidbody>().velocity = dir.normalized * currentShot.hitForce + new Vector3(0, currentShot.hitForce, 0);
             //add force to the ball plus some upward force according to the shot being played
 
             Vector3 ballDir;
