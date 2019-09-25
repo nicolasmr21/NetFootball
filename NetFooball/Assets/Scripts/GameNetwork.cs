@@ -16,7 +16,7 @@ public class GameNetwork : MonoBehaviour
 	// Cliente
 	public static string ClientName = "Client";
 	// ip del servidor
-	public static string SERVER_IP = "192.168.0.7";
+	public static string SERVER_IP = "localhost";
     // Puerto del servidor
     private readonly int SERVER_PORT = 13000;
 	// Data del mensage
