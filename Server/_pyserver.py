@@ -56,8 +56,6 @@ def createNewServer(server_host, server_port, max_connections = 2, max_connectio
     
     print( "[{0}] Esperando clientes...".format(dataTime()))
 
-    player = True
-
     _thread.start_new_thread(check_state, ())
 
     while True:
@@ -69,20 +67,6 @@ def createNewServer(server_host, server_port, max_connections = 2, max_connectio
             id = int(time.time())
             #obtengo el socket y la direccion ip y el puerto
             connection, address = server_socket.accept()
-
-            #identifico el jugador y envio quien es el primer jugador
-            if player:
-                string_Msj = bytes("Player1", 'utf-8')
-                connection.send(string_Msj)
-                player = False
-            else:
-                string_Msj = bytes("Player2", 'utf-8')
-                connection.send(string_Msj)
-                player = True
-
-
-            if(player):
-                player = False    
 
             #creo una tupla con los anteriores valores
             tupleC = connection, address, id
@@ -111,18 +95,26 @@ def check_state():
                 tupleC = queue_clients.get()
                 queue_clients.put(tupleC)
                 server_mensage = bytes("Wait", 'utf-8')
-
                 tupleC[0].send(server_mensage)
             except:
                 tupleC = queue_clients.get()
                 string_ip_address = tupleC[1][0] + ":" + str(tupleC[1][1])
                 print( "[{0}] Cliente desconectado - {1}".format(dataTime(), string_ip_address) )
                 del dic_clients[tupleC[2]]
+        # print(queue_clients.qsize())
 
 
 #Metodo que se encarga se crear un juego entre dos conexiones
 #El cual recibe los id de ambos jugadores
 def create_game(client1, client2, buffer_size, max_connections):
+    #identifico el jugador y envio quien es el primer jugador
+    string_Msj = bytes("Player1", 'utf-8')
+    dic_clients[client1][0].send(string_Msj)
+    
+    string_Msj = bytes("Player2", 'utf-8')
+    dic_clients[client2][0].send(string_Msj)
+
+    #inicio los hilos
     _thread.start_new_thread(client_thread, (client1, client2, buffer_size, max_connections))
     _thread.start_new_thread(client_thread, (client2, client1, buffer_size, max_connections))
 
@@ -163,7 +155,7 @@ def client_thread(id1, id2, buffer_size, max_connections):
             string_data += "{0}|{1}|{2}|{3}|{4}|".format(dic_clients[id2][1][0], str(dic_clients[id2][1][1]), str(len(dic_clients)), "{0:0.1f}ms".format( (time_end_receive - time_start_receive)), str(dic_clients[id2][2]))
 
             string_data = string_data[:- 1]
-            print(string_data)
+            # print(string_data)
 
             server_mensage = bytes(string_data, 'utf-8')
 
