@@ -60,8 +60,7 @@ public class GameNetwork : MonoBehaviour
         // Recibir y enviar mensaje
         try
         {
-
-          
+         
 
             // Limpiar los datos
             Array.Clear(bufferDataReceive, 0, bufferDataReceive.Length);
@@ -71,7 +70,11 @@ public class GameNetwork : MonoBehaviour
             //Mensaje recibido 
             string dataReceive = Encoding.ASCII.GetString(bufferDataReceive);
             //
-
+            if(dataReceive.Contains("NoPlayer2")) {
+                clientSocket.Close();
+                LoopConnection();
+                SceneManager.LoadScene(1);
+            }
 
             gameObject.GetComponent<Game>().UpdatePlay(dataReceive);
 
