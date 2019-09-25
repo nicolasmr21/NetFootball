@@ -16,7 +16,7 @@ public class GameNetwork : MonoBehaviour
 	// Cliente
 	public static string ClientName = "Client";
 	// ip del servidor
-	public static string SERVER_IP = "192.168.0.7";
+	public static string SERVER_IP = "localhost";
     // Puerto del servidor
     private readonly int SERVER_PORT = 13000;
 	// Data del mensage
@@ -60,8 +60,7 @@ public class GameNetwork : MonoBehaviour
         // Recibir y enviar mensaje
         try
         {
-
-          
+         
 
             // Limpiar los datos
             Array.Clear(bufferDataReceive, 0, bufferDataReceive.Length);
@@ -71,7 +70,11 @@ public class GameNetwork : MonoBehaviour
             //Mensaje recibido 
             string dataReceive = Encoding.ASCII.GetString(bufferDataReceive);
             //
-
+            if(dataReceive.Contains("NoPlayer2")) {
+                SceneManager.LoadScene(1);
+                clientSocket.Close();
+                LoopConnection();
+            }
 
             gameObject.GetComponent<Game>().UpdatePlay(dataReceive);
 

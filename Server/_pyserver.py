@@ -97,10 +97,23 @@ def createNewServer(server_host, server_port, max_connections = 2, max_connectio
 def dataTime():
     return datetime.now().strftime("%d/%m/%Y-%H:%M:%S")
 
+#metodo que se encarga de enviar un mensaje a los jugadores en espero y verifica que jugador sale de la cola
+# def check_state():
+#     while True:
+#         while not queue_clients.empty():
+#             try:
+#                 tupleC = queue_clients.get()
+#                 server_mensage = bytes("Wait", 'utf-8')
+#                 tupleC[0].send(server_mensage)
+#                 queue_clients.put(tupleC)
+#             except:
+#                 print( "[{0}] Cliente desconectado - {1}".format(dataTime(), queue_clients.get()[]) )
+
+
+
 #Metodo que se encarga se crear un juego entre dos conexiones
 #El cual recibe los id de ambos jugadores
 def create_game(client1, client2, buffer_size, max_connections):
-
     _thread.start_new_thread(client_thread, (client1, client2, buffer_size, max_connections))
     _thread.start_new_thread(client_thread, (client2, client1, buffer_size, max_connections))
 
@@ -148,7 +161,25 @@ def client_thread(id1, id2, buffer_size, max_connections):
             connection2.sendall(server_mensage)
 
         except:
-            print( "[{0}] Cliente desconectado - {1}".format(dataTime(), string_ip_address) )
-            del dic_clients[id1]
+            server_mensage = bytes("NoPlayer2", 'utf-8')
+            try:
+                string_ip_address = dic_clients[id2][1][0] + ":" + str(dic_clients[id2][1][1])
+                connection2.send(server_mensage)
+                connection2.close()
+                print( "[{0}] Cliente desconectado - {1}".format(dataTime(), string_ip_address) )
+            except :
+                try:
+                    string_ip_address = dic_clients[id1][1][0] + ":" + str(dic_clients[id1][1][1])
+                    connection.send(server_mensage)
+                    connection.close()
+                    print( "[{0}] Cliente desconectado - {1}".format(dataTime(), string_ip_address) )
+                except:
+                    break
+
+            if id1 in dic_clients:
+                del dic_clients[id1]
+            elif id2 in dic_clients:
+                del dic_clients[id2]
+
             break
             

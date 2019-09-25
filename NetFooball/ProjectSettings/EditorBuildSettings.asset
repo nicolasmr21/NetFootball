@@ -12,9 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScene.unity
     guid: 84bb980bbdb09d346aea53024703122f
   - enabled: 1
-    path: Assets/Scenes/Online.unity
+    path: Assets/Scenes/Local.unity
     guid: e7a15f6ba7a49cd4f871ab0b594a10ec
   - enabled: 1
-    path: Assets/Scenes/Local.unity
+    path: Assets/Scenes/Local2.unity
     guid: e905406cd67bae04b9b9b839f2075db6
   m_configObjects: {}
