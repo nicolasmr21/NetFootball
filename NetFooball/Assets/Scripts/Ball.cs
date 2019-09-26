@@ -32,8 +32,6 @@ public class Ball : MonoBehaviour
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero; // reset it's velocity to 0 so it doesn't move anymore
             transform.position = initialPos; // reset it's position 
-            
-
             score1 = score1 + 1;
 
         }
