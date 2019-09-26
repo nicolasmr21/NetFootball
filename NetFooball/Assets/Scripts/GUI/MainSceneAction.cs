@@ -21,4 +21,9 @@ public class MainSceneAction : MonoBehaviour
         GameNetwork.ClientName = FieldNamePlayer.text;
         SceneManager.LoadScene(1);
     }
+
+    public void OnPhotonServer()
+    {
+        SceneManager.LoadScene(4);
+    }
 }

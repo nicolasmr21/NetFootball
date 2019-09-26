@@ -19,6 +19,7 @@ public class Ball : MonoBehaviour
         initialPos = transform.position; // default it to where we first place it in the scene
     }
 
+    [PunRPC]
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.CompareTag("Wall2")) // if the ball hits a wall
@@ -42,6 +43,31 @@ public class Ball : MonoBehaviour
         c1.text = score1 + "";
 
         c2.text = score2 + "";
+
+        float x = transform.position.x;
+        float y = transform.position.y;
+        float z = transform.position.z;
+
+        if (x < -7)
+        {
+            transform.position = new Vector3(-7f, y, z);
+        }
+        if (x > 7.5)
+        {
+            transform.position = new Vector3(7.5f, y, z);
+        }
+        if (z > 9)
+        {
+            transform.position = new Vector3(x, y, 9f);
+        }
+        if (z < -13.5)
+        {
+            transform.position = new Vector3(x, y, -13.5f);
+        }
+        if (y > 15) {
+            transform.position = initialPos;
+
+        }
 
     }
 }

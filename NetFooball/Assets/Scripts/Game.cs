@@ -32,6 +32,7 @@ public class Game : MonoBehaviour
     private void Update()
     {
         time = time - 1 * Time.deltaTime;
+
         timeText.text = time.ToString("f0")+"";
 
         if (time < 0 && part == 1)
@@ -62,7 +63,7 @@ public class Game : MonoBehaviour
             Transform temp = player1.transform;
 
             player1.transform.position = player2.transform.position;
-            player2.transform.position = new Vector3(player2.transform.position.x, player2.transform.position.y, float.Parse("-18.54659"));
+            player2.transform.position = new Vector3(player2.transform.position.x, player2.transform.position.y, float.Parse("-12.54659"));
 
 
         }

@@ -31,6 +31,8 @@ public class Bot : MonoBehaviour
     void Update()
     {
         Move(); // calling the move method
+
+
     }
 
     void Move()

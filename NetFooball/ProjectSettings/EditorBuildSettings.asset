@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Summary.unity
     guid: 9a970fe955920b24a90676bb89f538d9
+  - enabled: 1
+    path: Assets/Scenes/PhotonServer.unity
+    guid: 3add0abd435b81e498b450ca0f2aa0cd
   m_configObjects: {}

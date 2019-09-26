@@ -85,10 +85,11 @@ public class GameNetwork : MonoBehaviour
                 empezar = true;
 
 
-           if (dataReceive.Contains("Wait"))
+            if (dataReceive.Contains("Wait"))
             {
                 b.GetComponent<Ball>().score1 = 0;
                 b.GetComponent<Ball>().score2 = 0;
+                b.transform.position = b.GetComponent<Ball>().initialPos;
                 gameObject.GetComponent<Game>().time = 60.0f;
                 gameObject.GetComponent<Game>().waiting.text = "Esperando jugadores...";
 
@@ -97,12 +98,14 @@ public class GameNetwork : MonoBehaviour
             {
                 if (empezar)
                 {
-                    gameObject.GetComponent<Game>().waiting.text = "";
-                    gameObject.GetComponent<Game>().UpdatePlay(dataReceive);
+                    System.Threading.Thread.Sleep(5000);
+                    empezar = false;
                 }
+                gameObject.GetComponent<Game>().waiting.text = "";
+                gameObject.GetComponent<Game>().UpdatePlay(dataReceive);
             }
 
-
+            
             // Data a enviar
             string dataSend = ClientName + "|" + p.transform.position.x + "|" + p.transform.position.y + "|" + p.transform.position.z
                 + "|" + p.transform.rotation.x + "|" + p.transform.rotation.y + "|" + p.transform.rotation.z + "|" + p.transform.rotation.w

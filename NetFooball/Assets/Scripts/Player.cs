@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
 
     }
 
-
+    [PunRPC]
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Ball")) // if we collide with the ball 
