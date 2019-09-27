@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
-
     public GameObject player1;
     public GameObject player2;
     public GameObject ball;
@@ -45,6 +45,7 @@ public class Game : MonoBehaviour
 
         }
         else if(time <0 && part==2) {
+            saveData();
             SceneManager.LoadScene(3);
         }
     }
@@ -52,9 +53,6 @@ public class Game : MonoBehaviour
 
     internal void UpdatePlay(string dataReceive)
     {
-
-
-
         Debug.Log(dataReceive);
 
         if (dataReceive.Contains("Player2"))
@@ -65,8 +63,6 @@ public class Game : MonoBehaviour
 
             player1.transform.position = player2.transform.position;
             player2.transform.position = new Vector3(player2.transform.position.x, player2.transform.position.y, float.Parse("-12.54659"));
-
-
         }
         if (time < 60.0f)
         {
@@ -103,18 +99,49 @@ public class Game : MonoBehaviour
 
                         }
 
-
                     }
-
 
                 }
             }
-
 
             catch (Exception e)
             {
 
 
+            }
+        }
+    }
+
+    private string setWinner()
+    {
+
+        int firstPlayerScore = ball.GetComponent<Ball>().score1;
+        int secondPlayerScore = ball.GetComponent<Ball>().score2;
+
+        if (firstPlayerScore > secondPlayerScore)
+        {
+            return player1.GetComponent<Player>().Name;
+        }
+        else if (firstPlayerScore < secondPlayerScore)
+        {
+            return player2.GetComponent<Bot>().name;
+        }
+        else
+        {
+            return "Draw";
+        }
+    }
+
+    void saveData()
+    {
+        string winner = setWinner();
+        string directory = Directory.GetParent(Environment.CurrentDirectory).ToString();
+        string[] gameData = { player1.GetComponent<Player>().Name, player2.GetComponent<Bot>().name, ball.GetComponent<Ball>().score1.ToString(), ball.GetComponent<Ball>().score2.ToString(), winner };
+        using (StreamWriter outputFile = new StreamWriter(Path.Combine(directory, @"GameData", "summary.txt")))
+        {
+            foreach (string line in gameData)
+            {
+                outputFile.WriteLine(line);
             }
         }
     }
