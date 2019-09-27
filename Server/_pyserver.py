@@ -109,9 +109,11 @@ def check_state():
 #El cual recibe los id de ambos jugadores
 def create_game(client1, client2, buffer_size, max_connections):
     #identifico el jugador y envio quien es el primer jugador
+    dic_clients[client1][0].send(b'Servidor')
     string_Msj = bytes("Player1", 'utf-8')
     dic_clients[client1][0].send(string_Msj)
     
+    dic_clients[client2][0].send(b'Servidor')
     string_Msj = bytes("Player2", 'utf-8')
     dic_clients[client2][0].send(string_Msj)
 
@@ -126,7 +128,7 @@ def client_thread(id1, id2, buffer_size, max_connections):
     #socket del id2
     connection2 =  dic_clients[id2][0]
 
-    connection.send(b'Servidor')
+    # connection.send(b'Servidor')
 
     while True:
 
