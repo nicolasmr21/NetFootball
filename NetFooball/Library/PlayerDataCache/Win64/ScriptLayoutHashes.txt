@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/CAMILO/source/repos/NetFotball/AppBuild/Client.exe
+C:/Users/nicol/Desktop/NetFootball/AppBuild/Client.exe
 SceneListBegin?
 Assets/Scenes/MainScene.unity
 Assets/Scenes/Local.unity
