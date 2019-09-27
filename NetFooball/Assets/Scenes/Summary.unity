@@ -286,8 +286,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04f5860c62423c64eb2a10000919970b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!4 &476698543
 Transform:
   m_ObjectHideFlags: 0
@@ -1033,9 +1034,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9177890bc666d3f4e8b074f76cc23ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score1: {fileID: 1321543789}
-  score2: {fileID: 1500279241}
-  winner: {fileID: 1791700934}
+  firstPlayerName: {fileID: 828181334}
+  secondPlayerName: {fileID: 758612535}
+  firstPlayerScore: {fileID: 1321543789}
+  secondPlayerScore: {fileID: 1500279241}
+  winnerName: {fileID: 1791700934}
+  matchData:
+  - ' '
+  - ' '
+  - ' '
+  - ' '
+  - ' '
 --- !u!1 &1791700932
 GameObject:
   m_ObjectHideFlags: 0
