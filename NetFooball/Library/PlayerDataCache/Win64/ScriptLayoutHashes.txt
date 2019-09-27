@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/nicol/Desktop/NetFootball/AppBuild/Client.exe
+C:/Users/CAMILO/source/repos/NetFotball/AppBuild/Client.exe
 SceneListBegin?
 Assets/Scenes/MainScene.unity
 Assets/Scenes/Local.unity
@@ -181,7 +181,7 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 e1e615eaf73e560828f53edc8952e615 Assembly-CSharp.dll:.PunTurnManager
-d0f87f34d23bbab9065be950cf3674f1 Assembly-CSharp.dll:.Summary
+258df32d78abbc3c20b05ecb565d1a33 Assembly-CSharp.dll:.Summary
 931f489e44eadf809e9310429c99dde5 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioListenerExtension
 fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension

@@ -16,6 +16,7 @@ public class Summary : MonoBehaviour
 
     void Awake()
     {
+        loadData();
         setValues();
     }
 
