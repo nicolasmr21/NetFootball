@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,30 +12,31 @@ public class Summary : MonoBehaviour
     public Text firstPlayerScore;
     public Text secondPlayerScore;
     public Text winnerName;
-    public GlobalControl result;
+    public string[] matchData = { " ", " ", " ", " ", " " };
 
-    //void Awake()
-    //{
-    //    firstPlayerName = result.Instance.player1.GetComponent<Player>().Name;
-    //    secondPlayerName = result.Instance.player2.GetComponent<Bot>().name;
-    //    firstPlayerScore = result.Instance.ball.GetComponent<Ball>().score1;
-    //    secondPlayerScore = result.Instance.ball.GetComponent<Ball>().score2;
-    //    setWinner();
-    //}
+    void Awake()
+    {
+        loadData();
+        setValues();
+    }
 
-    //private void setWinner()
-    //{
-    //    if (Int32.Parse(firstPlayerScore.text) > Int32.Parse(secondPlayerScore.text))
-    //    {
-    //        winnerName.text = firstPlayerName.text;
-    //    }
-    //    else if (Int32.Parse(firstPlayerScore) < Int32.Parse(secondPlayerScore))
-    //    {
-    //        winnerName.text = secondPlayerName.text;
-    //    }
-    //    else
-    //    {
-    //        winnerName.text = "Draw";
-    //    }
-    //}
+    void setValues() {
+        firstPlayerName.text = matchData[0];
+        secondPlayerName.text = matchData[1];
+        firstPlayerScore.text = matchData[2];
+        secondPlayerScore.text = matchData[3];
+        winnerName.text = matchData[4];
+    }
+
+    void loadData() {
+        string line;
+        string directory = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString();
+        StreamReader file = new StreamReader(Path.Combine(directory, @"GameData", "summary.txt"));
+
+        for (int i = 0; (line = file.ReadLine()) != null; i++)
+        {
+            matchData[i] = line;
+        }
+        file.Close();
+    }
 }
