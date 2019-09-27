@@ -188,6 +188,7 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 9db963832ef7feebd35f44e6ad6f646c Assembly-CSharp.dll:.OnJoinedInstantiate
 ee0cef6caaac8ae485bfa82f000f0f7b Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
+2998dfafefdd2ba2fc0d9f39231bcddb Assembly-CSharp.dll:.GamePhoton
 0b134c4cc8a800215d6f200dfe0a080d Assembly-CSharp.dll:.GlobalControl
 5fc094978ce3e3591a7500ed380d854a Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
 5421466ed6291c1ab2d1650a128005b2 Assembly-CSharp.dll:.PhotonLagSimulationGui

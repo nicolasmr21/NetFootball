@@ -1230,8 +1230,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 890651468}
-  - component: {fileID: 890651467}
   - component: {fileID: 890651470}
+  - component: {fileID: 890651469}
+  - component: {fileID: 890651467}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -1246,13 +1247,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 890651466}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7552ce4759151e248be0fe6b5a193e61, type: 3}
+  m_Script: {fileID: 11500000, guid: 338578eb83ef50644aca57f643e38067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 0}
-  player2: {fileID: 0}
   ball: {fileID: 1640194195}
   initial: 0
   timeText: {fileID: 113908492}
@@ -1281,6 +1280,44 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &890651469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890651466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  OwnerShipWasTransfered: 0
+  prefixBackup: -1
+  synchronization: 3
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 534669905}
+  - {fileID: 2099128456}
+  - {fileID: 1573876291}
+  - {fileID: 809386384}
+  - {fileID: 1220851062}
+  - {fileID: 1640194199}
+  - {fileID: 234741993}
+  - {fileID: 497202550}
+  - {fileID: 202260355}
+  - {fileID: 214067490}
+  - {fileID: 0}
+  - {fileID: 113908491}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 1
+  instantiationId: 1
+  currentMasterID: -1
+  isRuntimeInstantiated: 0
 --- !u!114 &890651470
 MonoBehaviour:
   m_ObjectHideFlags: 0

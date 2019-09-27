@@ -26,7 +26,9 @@ public class Game : MonoBehaviour
         part = 1;
         initial = false;
         Debug.Log("Nuevo");
+
         player1.GetComponent<Player>().Name = GameNetwork.ClientName;
+
         waiting.text = "";
     }
 
@@ -88,8 +90,9 @@ public class Game : MonoBehaviour
                         {
                             player2.transform.position = new Vector3(transform[0], transform[1], transform[2]);
                             player2.transform.rotation = new Quaternion(transform[3], transform[4], transform[5], transform[6]);
-                            ball.GetComponent<Rigidbody>().MovePosition(new Vector3(transform[7], transform[8], transform[9]));
-                            //ball.GetComponent<Ball>().score2 = int.Parse(transform[10].ToString());
+                            //ball.GetComponent<Rigidbody>().MovePosition(new Vector3(transform[7], transform[8], transform[9]));
+                            ball.transform.position = new Vector3(transform[7], transform[8], transform[9]);
+                            ball.GetComponent<Ball>().score2 = int.Parse(transform[10].ToString());
                             player2.GetComponent<Bot>().name = playerName;
 
                         }

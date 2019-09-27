@@ -66,7 +66,6 @@ public class GameNetwork : MonoBehaviour
         try
         {
 
-
             // Limpiar los datos
             Array.Clear(bufferDataReceive, 0, bufferDataReceive.Length);
 
@@ -90,7 +89,8 @@ public class GameNetwork : MonoBehaviour
             {
                 b.GetComponent<Ball>().score1 = 0;
                 b.GetComponent<Ball>().score2 = 0;
-                b.transform.position = b.GetComponent<Ball>().initialPos;
+                b.SetActive(false);
+                p.SetActive(false);
                 gameObject.GetComponent<Game>().time = 60.0f;
                 gameObject.GetComponent<Game>().waiting.text = "Esperando jugadores...";
 
@@ -99,26 +99,29 @@ public class GameNetwork : MonoBehaviour
             {
                 if (empezar)
                 {
-                    System.Threading.Thread.Sleep(5000);
-                    empezar = false;
+                    p.SetActive(true);
+                    b.SetActive(true);
+                    gameObject.GetComponent<Game>().waiting.text = "";
+                    gameObject.GetComponent<Game>().UpdatePlay(dataReceive);
+
                 }
-                gameObject.GetComponent<Game>().waiting.text = "";
-                gameObject.GetComponent<Game>().UpdatePlay(dataReceive);
+
             }
 
-            
-            // Data a enviar
-            string dataSend = ClientName + "|" + p.transform.position.x + "|" + p.transform.position.y + "|" + p.transform.position.z
+            String dataSend = ClientName + "|" + p.transform.position.x + "|" + p.transform.position.y + "|" + p.transform.position.z
                 + "|" + p.transform.rotation.x + "|" + p.transform.rotation.y + "|" + p.transform.rotation.z + "|" + p.transform.rotation.w
                 + "|" + b.transform.position.x + "|" + b.transform.position.y + "|" + b.transform.position.z + "|" + p.GetComponent<Player>().score
-                + "|" +gameObject.GetComponent<Game>().time;
+                + "|" + gameObject.GetComponent<Game>().time;
             ;
+            // Data a enviar
+
+
 
             //
             //Debug.Log("Mensage recibido: " + dataReceive);
             // Mensage para enviar
 
-               byte[] bufferDataSend = Encoding.ASCII.GetBytes(dataSend);
+            byte[] bufferDataSend = Encoding.ASCII.GetBytes(dataSend);
             // Enviar mensaje al servidor
                clientSocket.Send(bufferDataSend);
              

@@ -129,6 +129,7 @@
     <Compile Include="Assets\Scripts\GUI\MainSceneAction.cs" />
     <Compile Include="Assets\Scripts\GUI\Summary.cs" />
     <Compile Include="Assets\Scripts\Photon\Character.cs" />
+    <Compile Include="Assets\Scripts\Photon\GamePhoton.cs" />
     <Compile Include="Assets\Scripts\Photon\NetManager.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\ShotManager.cs" />
