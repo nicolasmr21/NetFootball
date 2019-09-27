@@ -30,7 +30,7 @@ public class Summary : MonoBehaviour
 
     void loadData() {
         string line;
-        string directory = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString();
+        string directory = (Directory.GetParent(Environment.CurrentDirectory).ToString());
         StreamReader file = new StreamReader(Path.Combine(directory, @"GameData", "summary.txt"));
 
         for (int i = 0; (line = file.ReadLine()) != null; i++)
