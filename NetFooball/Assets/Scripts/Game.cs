@@ -55,6 +55,7 @@ public class Game : MonoBehaviour
 
     internal void UpdatePlay(string dataReceive)
     {
+        lock (this);
         Debug.Log(dataReceive);
 
         if (dataReceive.Contains("Player2"))
@@ -81,7 +82,7 @@ public class Game : MonoBehaviour
                         float[] transform = new float[] { float.Parse(dataSplited[i + 5]), float.Parse(dataSplited[i + 6]), float.Parse(dataSplited[i + 7]),
                                                    float.Parse(dataSplited[i + 8]), float.Parse(dataSplited[i + 9]),float.Parse(dataSplited[i + 10]), float.Parse(dataSplited[i + 11])
                                                    ,float.Parse(dataSplited[i+12]),float.Parse(dataSplited[i+13]), float.Parse(dataSplited[i+14])
-                    ,float.Parse(dataSplited[i+15]) ,float.Parse(dataSplited[i+15])};
+                    ,float.Parse(dataSplited[i+15]) ,float.Parse(dataSplited[i+16])};
                         //
                         Debug.Log(playerName);
 
@@ -90,9 +91,18 @@ public class Game : MonoBehaviour
                         {
                             player2.transform.position = new Vector3(transform[0], transform[1], transform[2]);
                             player2.transform.rotation = new Quaternion(transform[3], transform[4], transform[5], transform[6]);
-                            //ball.GetComponent<Rigidbody>().MovePosition(new Vector3(transform[7], transform[8], transform[9]));
-                            ball.transform.position = new Vector3(transform[7], transform[8], transform[9]);
-                            ball.GetComponent<Ball>().score2 = int.Parse(transform[10].ToString());
+
+                            float x = ball.transform.position.x;
+                            float y = ball.transform.position.y;
+                            float z = ball.transform.position.z;
+
+                            if (x < transform[7] + 0.5 && x > transform[7] - 0.5 && y < transform[8] + 0.5 && y > transform[8] - 0.5
+                                && z < transform[9] + 0.5 && z > transform[9] - 0.5)
+                            {
+                                ball.GetComponent<Rigidbody>().MovePosition(new Vector3(transform[7], transform[8], transform[9]));
+                            }
+
+                            //ball.GetComponent<Ball>().score2 = int.Parse(transform[10].ToString());
                             player2.GetComponent<Bot>().name = playerName;
 
                         }
