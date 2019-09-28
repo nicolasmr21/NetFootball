@@ -81,9 +81,18 @@ public class GameNetwork : MonoBehaviour
                 LoopConnection();
             }
 
-            if (dataReceive.Contains("Servidor"))
+            if (dataReceive.Contains("Servidor")) {
+                gameObject.GetComponent<Game>().waiting.text = "";
                 empezar = true;
+            }
 
+            if (empezar)
+            {
+                p.SetActive(true);
+                b.SetActive(true);
+                gameObject.GetComponent<Game>().UpdatePlay(dataReceive);
+
+            }
 
             if (dataReceive.Contains("Wait"))
             {
@@ -95,18 +104,7 @@ public class GameNetwork : MonoBehaviour
                 gameObject.GetComponent<Game>().waiting.text = "Esperando jugadores...";
 
             }
-            else 
-            {
-                if (empezar)
-                {
-                    p.SetActive(true);
-                    b.SetActive(true);
-                    gameObject.GetComponent<Game>().waiting.text = "";
-                    gameObject.GetComponent<Game>().UpdatePlay(dataReceive);
 
-                }
-
-            }
 
             String dataSend = ClientName + "|" + p.transform.position.x + "|" + p.transform.position.y + "|" + p.transform.position.z
                 + "|" + p.transform.rotation.x + "|" + p.transform.rotation.y + "|" + p.transform.rotation.z + "|" + p.transform.rotation.w
