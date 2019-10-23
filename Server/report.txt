@@ -20,4 +20,6 @@
  El cliente con ip 127.0.0.1 Visualizó el video 55.2633879 Segundos 
  El cliente con ip 127.0.0.1 Visualizó el video 55.4032117 Segundos 
  El cliente con ip 127.0.0.1 Visualizó el video 3.6079067 Segundos 
- El cliente con ip 127.0.0.1 Visualizó el video 14.7129707 Segundos
+ El cliente con ip 127.0.0.1 Visualizó el video 14.7129707 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 14.4922941 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 4.935025 Segundos

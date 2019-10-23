@@ -206,3 +206,4 @@ e1b8eaae6a90f88343f8be6d517488f6 Assembly-CSharp.dll:.PhotonView
 6e40df0640db68ace23b58a832a9da7a Assembly-CSharp.dll:.InRoomChat
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 75b9e869045febff34eb1b6824fa0533 Assembly-CSharp.dll:.ShotManager
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.ButtonHandler
