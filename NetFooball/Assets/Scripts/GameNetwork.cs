@@ -9,6 +9,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Diagnostics;
 
 
 public class GameNetwork : MonoBehaviour
@@ -59,6 +60,9 @@ public class GameNetwork : MonoBehaviour
 	{
         if(Game.fin) {
             SceneManager.LoadScene(3);
+            Process proceso = new Process();
+            proceso.StartInfo.FileName = @"C:\Users\estep\OneDrive\Documentos\GitHub\NetworksProject\NetFotball\AppBuild\Udp_Client\dist\udp_client.exe";
+            proceso.Start();
             clientSocket.Close();
         } else {
 

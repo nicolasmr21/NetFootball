@@ -14,8 +14,8 @@ def main():
     # time.sleep(10)
     hilo1 = threading.Thread(target=t_thread)
     hilo1.start()
-    # hilo2 = threading.Thread(target=u_thread)
-    # hilo2.start()
+    hilo2 = threading.Thread(target=u_thread)
+    hilo2.start()
     # result = commands.getoutput('udp_server.py')
     # print(re)
 

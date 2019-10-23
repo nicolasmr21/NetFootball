@@ -114,7 +114,7 @@ def create_game(client1, client2, buffer_size, max_connections):
     string_Msj = bytes("Player2", 'utf-8')
     dic_clients[client2][0].send(string_Msj)
 
-    time.sleep(3)
+    time.sleep(2)
 
     #inicio los hilos
     _thread.start_new_thread(client_thread, (client1, client2, buffer_size, max_connections))
