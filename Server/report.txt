@@ -1,0 +1,18 @@
+ 
+ El cliente con ip 127.0.0.1 Visualizó el video 2.6013919 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 20.3087793 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 33.0933578 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 33.106357 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 33.0659337 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 33.0623071 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 33.0454814 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 33.0428547 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 8.6935507 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 33.0660029 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 5.1212501 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 33.0666848 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 9.2567704 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 55.8763093 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 24.7782681 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 1.3267018 Segundos 
+ El cliente con ip 127.0.0.1 Visualizó el video 1.0131716 Segundos

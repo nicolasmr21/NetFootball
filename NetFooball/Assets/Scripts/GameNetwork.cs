@@ -27,10 +27,8 @@ public class GameNetwork : MonoBehaviour
 		AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp
 	);
 
-    Boolean empezar;
-
-
-
+    Boolean empezar = false;
+       
     // Update se llama una vez por frame
     void Update()
     {
@@ -59,13 +57,19 @@ public class GameNetwork : MonoBehaviour
 	// Cuando ya está conectado, metodo para enviar datos
 	private void LoopSend()
 	{
+        if(Game.fin) {
+            SceneManager.LoadScene(3);
+            clientSocket.Close();
+        } else {
+
         GameObject p = gameObject.GetComponent<Game>().player1;
+        GameObject p2 = gameObject.GetComponent<Game>().player2;
         GameObject b = gameObject.GetComponent<Game>().ball;
+        string name = GetComponent<Game>().player1.gameObject.GetComponent<Player>().Name;
 
         // Recibir y enviar mensaje
         try
         {
-
             // Limpiar los datos
             Array.Clear(bufferDataReceive, 0, bufferDataReceive.Length);
 
@@ -73,58 +77,72 @@ public class GameNetwork : MonoBehaviour
             int receiveSize = clientSocket.Receive(bufferDataReceive);
             //Mensaje recibido 
             string dataReceive = Encoding.ASCII.GetString(bufferDataReceive);
-            //
-            if (dataReceive.Contains("NoPlayer2"))
-            {
+            
+
+            if (dataReceive.Contains("NoPlayer2")) {
+                empezar = false;
                 SceneManager.LoadScene(2);
                 clientSocket.Close();
                 LoopConnection();
+                empezar = false;
             }
 
-            if (dataReceive.Contains("Servidor")) {
-                gameObject.GetComponent<Game>().waiting.text = "";
-                empezar = true;
-            }
-
-            if (empezar)
-            {
-                p.SetActive(true);
-                b.SetActive(true);
-                gameObject.GetComponent<Game>().UpdatePlay(dataReceive);
-
-            }
-
-            if (dataReceive.Contains("Wait"))
-            {
+            if (dataReceive.Contains("Wait")) {
                 b.GetComponent<Ball>().score1 = 0;
                 b.GetComponent<Ball>().score2 = 0;
                 b.SetActive(false);
                 p.SetActive(false);
+                p2.SetActive(false);
                 gameObject.GetComponent<Game>().time = 60.0f;
                 gameObject.GetComponent<Game>().waiting.text = "Esperando jugadores...";
-
+                empezar = false;
             }
 
+            if(dataReceive.Contains("Connect") && !empezar) { 
+                gameObject.GetComponent<Game>().waiting.text = "";
+                gameObject.GetComponent<Game>().time = 60.0f;
+                p.SetActive(true);
+                b.SetActive(true);
+                p2.SetActive(true);
+                empezar = true;
+            }
+                       
+            if(empezar) {
+                gameObject.GetComponent<Game>().UpdatePlay(dataReceive);
 
-            String dataSend = ClientName + "|" + p.transform.position.x + "|" + p.transform.position.y + "|" + p.transform.position.z
+                String dataSend = name + "|" + p.transform.position.x + "|" + p.transform.position.y + "|" + p.transform.position.z
                 + "|" + p.transform.rotation.x + "|" + p.transform.rotation.y + "|" + p.transform.rotation.z + "|" + p.transform.rotation.w
                 + "|" + b.transform.position.x + "|" + b.transform.position.y + "|" + b.transform.position.z + "|" + p.GetComponent<Player>().score
                 + "|" + gameObject.GetComponent<Game>().time;
-            ;
-            // Data a enviar
+                // Data a enviar
+
+                //
+                //Debug.Log("Mensage recibido: " + dataReceive);
+                // Mensage para enviar
+
+                byte[] bufferDataSend = Encoding.ASCII.GetBytes(dataSend);
+                // Enviar mensaje al servidor
+                clientSocket.Send(bufferDataSend);
+
+            }
+            //String dataSend = name + "|" + p.transform.position.x + "|" + p.transform.position.y + "|" + p.transform.position.z
+            //    + "|" + p.transform.rotation.x + "|" + p.transform.rotation.y + "|" + p.transform.rotation.z + "|" + p.transform.rotation.w
+            //    + "|" + b.transform.position.x + "|" + b.transform.position.y + "|" + b.transform.position.z + "|" + p.GetComponent<Player>().score
+            //    + "|" + gameObject.GetComponent<Game>().time;
+            //// Data a enviar
 
 
+
+            ////
+            ////Debug.Log("Mensage recibido: " + dataReceive);
+            //// Mensage para enviar
+
+            //byte[] bufferDataSend = Encoding.ASCII.GetBytes(dataSend);
+            //// Enviar mensaje al servidor
+            //clientSocket.Send(bufferDataSend);
 
             //
-            //Debug.Log("Mensage recibido: " + dataReceive);
-            // Mensage para enviar
-
-            byte[] bufferDataSend = Encoding.ASCII.GetBytes(dataSend);
-            // Enviar mensaje al servidor
-               clientSocket.Send(bufferDataSend);
-             
-			//
-		}
+        }
 		catch (SocketException)
 		{
 			clientSocket.Shutdown(SocketShutdown.Both);
@@ -132,5 +150,6 @@ public class GameNetwork : MonoBehaviour
 			SceneManager.LoadScene(0);
 
 		}
+       }
 	}
 }

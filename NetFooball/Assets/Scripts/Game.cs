@@ -17,6 +17,8 @@ public class Game : MonoBehaviour
     public int part;
     public int n;
     public Text waiting;
+    public int tipePlayer = 0;//jugador 1 o 2 
+    public static bool fin = false;
 
 
 
@@ -34,95 +36,117 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
-        time = time - 1 * Time.deltaTime;
 
-        timeText.text = time.ToString("f0")+"";
-
-        if (time < 0 && part == 1)
+        if (time <= 0 && part == 1)
         {
             time = 60.0f;
             part++;
-            player1.transform.position = player1.GetComponent<Player>().initialPos;
-            player2.transform.position = player2.GetComponent<Bot>().initialPos;
+
+            ball.transform.position = ball.GetComponent<Ball>().initialPos;
+            if(tipePlayer == 0) {
+                player1.transform.position = player1.GetComponent<Player>().initialPos;
+                player2.transform.position = player2.GetComponent<Bot>().initialPos;
+            } else {
+                player2.transform.position = player1.GetComponent<Player>().initialPos;
+                player1.transform.position = player2.GetComponent<Bot>().initialPos;
+            }
 
         }
-        else if(time <0 && part==2) {
+        else if(time <= 0 && part <= 2) {
+            fin = true;
             saveData();
             SceneManager.LoadScene(3);
+            //GameNetwork.clientSocket.Close();
+        }
+        else {
+            time = time - 1 * Time.deltaTime;
+            timeText.text = time.ToString("f0")+"";
         }
     }
 
 
     internal void UpdatePlay(string dataReceive)
     {
+        if(fin == false) {
         lock (this);
         Debug.Log(dataReceive);
 
-        if (dataReceive.Contains("Player2"))
+        if(dataReceive.Contains("Player1")) {
+            tipePlayer = 0;
+            player1.GetComponent<Player>().n = 1;
+            Debug.Log("Player1" + GameNetwork.ClientName);
+            Transform temp = player1.transform;
+            time = 60.0f;
+
+            player1.transform.position = player1.GetComponent<Player>().initialPos;
+            player2.transform.position = player2.GetComponent<Bot>().initialPos;
+        }
+
+        else if (dataReceive.Contains("Player2"))
         {
+            tipePlayer = 1;
             player1.GetComponent<Player>().n = 2;
             Debug.Log("Player2" + GameNetwork.ClientName);
             Transform temp = player1.transform;
+            time = 60.0f;
 
-            player1.transform.position = player2.transform.position;
-            player2.transform.position = new Vector3(player2.transform.position.x, player2.transform.position.y, float.Parse("-12.54659"));
+            player1.transform.position = player2.GetComponent<Bot>().initialPos;
+            player2.transform.position = player1.GetComponent<Player>().initialPos;
         }
-        if (time < 60.0f)
+        else 
         {
-            try
+            if (time <= 60.0f && time > 0)
             {
-                string[] dataSplited = dataReceive.Split('|');
-
-                if (dataSplited.Length >= 15)
+                try
                 {
-                    for (int i = 0; i < dataSplited.Length; i += 16)
-                    {
-
-                        string playerName = dataSplited[i + 4];
-                        float[] transform = new float[] { float.Parse(dataSplited[i + 5]), float.Parse(dataSplited[i + 6]), float.Parse(dataSplited[i + 7]),
-                                                   float.Parse(dataSplited[i + 8]), float.Parse(dataSplited[i + 9]),float.Parse(dataSplited[i + 10]), float.Parse(dataSplited[i + 11])
-                                                   ,float.Parse(dataSplited[i+12]),float.Parse(dataSplited[i+13]), float.Parse(dataSplited[i+14])
-                    ,float.Parse(dataSplited[i+15]) ,float.Parse(dataSplited[i+16])};
-                        //
-                        Debug.Log(playerName);
+                    string[] dataSplited = dataReceive.Split('|');
+                    for(int i = 0; i < dataSplited.Length; i+=13) {
 
 
-                        if (playerName != player1.GetComponent<Player>().Name)
-                        {
-                            player2.transform.position = new Vector3(transform[0], transform[1], transform[2]);
-                            player2.transform.rotation = new Quaternion(transform[3], transform[4], transform[5], transform[6]);
-
-                            float x = ball.transform.position.x;
-                            float y = ball.transform.position.y;
-                            float z = ball.transform.position.z;
-
-                            if (x < transform[7] + 0.5 && x > transform[7] - 0.5 && y < transform[8] + 0.5 && y > transform[8] - 0.5
-                                && z < transform[9] + 0.5 && z > transform[9] - 0.5)
+                            string playerName = dataSplited[0 + i];
+                            float[] transform = new float[] {float.Parse(dataSplited[1 + i]), float.Parse(dataSplited[2 + i]), float.Parse(dataSplited[3 + i])
+                                                           ,float.Parse(dataSplited[4 + i]) , float.Parse(dataSplited[5 + i]),float.Parse(dataSplited[6 + i]), float.Parse(dataSplited[7 + i])
+                                                           ,float.Parse(dataSplited[8 + i]) ,float.Parse(dataSplited[9 + i]), float.Parse(dataSplited[10 + i])
+                                                           ,float.Parse(dataSplited[11 + i]) ,float.Parse(dataSplited[12 + i])};
+                            //
+                            Debug.Log(playerName);
+                
+                            if (playerName != player1.GetComponent<Player>().Name)
                             {
-                                ball.GetComponent<Rigidbody>().MovePosition(new Vector3(transform[7], transform[8], transform[9]));
+                                player2.transform.position = new Vector3(transform[0], transform[1], transform[2]);
+                                player2.transform.rotation = new Quaternion(transform[3], transform[4], transform[5], transform[6]);
+
+                                float x = ball.transform.position.x;
+                                float y = ball.transform.position.y;
+                                float z = ball.transform.position.z;
+
+                                if (x < transform[7] + 0.5 && x > transform[7] - 0.5 && y < transform[8] + 0.5 && y > transform[8] - 0.5
+                                    && z < transform[9] + 0.5 && z > transform[9] - 0.5)
+                                {
+                                    ball.GetComponent<Rigidbody>().MovePosition(new Vector3(transform[7], transform[8], transform[9]));
+                                }
+
+                                ball.GetComponent<Ball>().score2 = int.Parse(transform[10].ToString());
+                                player2.GetComponent<Bot>().name = playerName;
+
                             }
-
-                            //ball.GetComponent<Ball>().score2 = int.Parse(transform[10].ToString());
-                            player2.GetComponent<Bot>().name = playerName;
-
-                        }
-                        else
-                        {
+                            else
+                            {
 
 
-                        }
-
-                    }
+                            }
+                   }
 
                 }
-            }
 
             catch (Exception e)
             {
 
 
             }
+            }
         }
+       }
     }
 
     private string setWinner()
@@ -157,5 +181,6 @@ public class Game : MonoBehaviour
                 outputFile.WriteLine(line);
             }
         }
+        SceneManager.LoadScene(3);
     }
 }

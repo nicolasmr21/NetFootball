@@ -7,11 +7,8 @@ list_clients = []
 queue_clients = queue.Queue(maxsize=20)
 dic_clients = {}
 
-
-
 #Player1
 #Player2
-
 
 def createNewServer(server_host, server_port, max_connections = 2, max_connections_wait = 4, buffer_size = 1024):
 
@@ -109,13 +106,15 @@ def check_state():
 #El cual recibe los id de ambos jugadores
 def create_game(client1, client2, buffer_size, max_connections):
     #identifico el jugador y envio quien es el primer jugador
-    dic_clients[client1][0].send(b'Servidor')
+    dic_clients[client1][0].send(b'Connect')
     string_Msj = bytes("Player1", 'utf-8')
     dic_clients[client1][0].send(string_Msj)
     
-    dic_clients[client2][0].send(b'Servidor')
+    dic_clients[client2][0].send(b'Connect')
     string_Msj = bytes("Player2", 'utf-8')
     dic_clients[client2][0].send(string_Msj)
+
+    time.sleep(3)
 
     #inicio los hilos
     _thread.start_new_thread(client_thread, (client1, client2, buffer_size, max_connections))
@@ -158,9 +157,9 @@ def client_thread(id1, id2, buffer_size, max_connections):
             string_data += "{0}|{1}|{2}|{3}|{4}|".format(dic_clients[id2][1][0], str(dic_clients[id2][1][1]), str(len(dic_clients)), "{0:0.1f}ms".format( (time_end_receive - time_start_receive)), str(dic_clients[id2][2]))
 
             string_data = string_data[:- 1]
-            # print(string_data)
+            print(str(dic_clients[id1][2]))
 
-            server_mensage = bytes(string_data, 'utf-8')
+            server_mensage = bytes(str(dic_clients[id1][2]), 'utf-8')
 
             connection2.sendall(server_mensage)
 
@@ -182,7 +181,7 @@ def client_thread(id1, id2, buffer_size, max_connections):
 
             if id1 in dic_clients:
                 del dic_clients[id1]
-            elif id2 in dic_clients:
+            if id2 in dic_clients:
                 del dic_clients[id2]
 
             break
