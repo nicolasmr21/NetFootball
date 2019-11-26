@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PhotonServer.unity
     guid: 3add0abd435b81e498b450ca0f2aa0cd
+  - enabled: 1
+    path: Assets/Scenes/Local Menu.unity
+    guid: ad2c06fb34ed3f94f8bb1ba2f1173578
+  - enabled: 1
+    path: Assets/Scenes/Bot Game.unity
+    guid: 1c2a0c9506cf2e549a24235e50674561
   m_configObjects: {}

@@ -19,7 +19,7 @@ public class MainSceneAction : MonoBehaviour
     public void OnPlayLocal()
     {
         GameNetwork.ClientName = FieldNamePlayer.text;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(5);
     }
 
     public void OnPhotonServer()
